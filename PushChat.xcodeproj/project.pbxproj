@@ -21,6 +21,7 @@
 		3C6B6C74198A103A0050471A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C6B6C56198A103A0050471A /* UIKit.framework */; };
 		3C6B6C7C198A103A0050471A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3C6B6C7A198A103A0050471A /* InfoPlist.strings */; };
 		3C6B6C7E198A103A0050471A /* PushChatTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C6B6C7D198A103A0050471A /* PushChatTests.m */; };
+		3C6B6C88198A55320050471A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C6B6C87198A55320050471A /* SystemConfiguration.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		3C6B6C79198A103A0050471A /* PushChatTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PushChatTests-Info.plist"; sourceTree = "<group>"; };
 		3C6B6C7B198A103A0050471A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3C6B6C7D198A103A0050471A /* PushChatTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PushChatTests.m; sourceTree = "<group>"; };
+		3C6B6C87198A55320050471A /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C6B6C88198A55320050471A /* SystemConfiguration.framework in Frameworks */,
 				3C6B6C55198A103A0050471A /* CoreGraphics.framework in Frameworks */,
 				3C6B6C57198A103A0050471A /* UIKit.framework in Frameworks */,
 				3C6B6C53198A103A0050471A /* Foundation.framework in Frameworks */,
@@ -101,6 +104,7 @@
 		3C6B6C51198A103A0050471A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3C6B6C87198A55320050471A /* SystemConfiguration.framework */,
 				3C6B6C52198A103A0050471A /* Foundation.framework */,
 				3C6B6C54198A103A0050471A /* CoreGraphics.framework */,
 				3C6B6C56198A103A0050471A /* UIKit.framework */,
@@ -393,6 +397,7 @@
 				GCC_PREFIX_HEADER = "PushChat/PushChat-Prefix.pch";
 				INFOPLIST_FILE = "PushChat/PushChat-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

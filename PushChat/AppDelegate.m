@@ -13,9 +13,67 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    
+    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:
+     (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
+    
+    UILocalNotification *localNotif = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
+    if (localNotif) {
+        NSString *itemName = [localNotif.userInfo objectForKey:@"abc"];
+        application.applicationIconBadgeNumber = localNotif.applicationIconBadgeNumber - 1;
+    }
+    
+    
+    UILocalNotification *remoteNotif = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+    if (remoteNotif) {
+        NSString *itemName = [remoteNotif.userInfo objectForKey:@"abc"];
+        application.applicationIconBadgeNumber = remoteNotif.applicationIconBadgeNumber - 1;
+    }
     return YES;
+    
 }
-							
+
+
+- (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken
+{
+	NSLog(@"My token is: %@", deviceToken);
+    const void *devTokenBytes = [deviceToken bytes];
+    [self sendProviderDeviceToken:devTokenBytes];
+}
+
+- (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
+{
+	NSLog(@"Failed to get token, error: %@", error);
+}
+
+
+- (void)sendProviderDeviceToken:(const void *)tokenBytes
+{
+    
+}
+
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+{
+    //handle remote notification
+    if ([application applicationState] ==  UIApplicationStateInactive)
+    {
+        NSLog(@"Running in background");
+    }
+    else if ([application applicationState] ==  UIApplicationStateActive)
+    {
+        NSLog(@"Running in foreground");
+    }
+}
+
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
+{
+    NSString *itemName = [notification.userInfo objectForKey:@"abc"];
+    application.applicationIconBadgeNumber = notification.applicationIconBadgeNumber - 1;
+
+}
+
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
