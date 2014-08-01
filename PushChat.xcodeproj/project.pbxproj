@@ -22,6 +22,7 @@
 		3C6B6C7C198A103A0050471A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3C6B6C7A198A103A0050471A /* InfoPlist.strings */; };
 		3C6B6C7E198A103A0050471A /* PushChatTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C6B6C7D198A103A0050471A /* PushChatTests.m */; };
 		3C6B6C88198A55320050471A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C6B6C87198A55320050471A /* SystemConfiguration.framework */; };
+		F8C6A73D61D7496C9599747F /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E1C1966429C4D9DB0CD95A0 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +36,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		21E12356C70345A7BB9A898A /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		2E1C1966429C4D9DB0CD95A0 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C6B6C4F198A103A0050471A /* PushChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PushChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C6B6C52198A103A0050471A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3C6B6C54198A103A0050471A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -66,6 +69,7 @@
 				3C6B6C55198A103A0050471A /* CoreGraphics.framework in Frameworks */,
 				3C6B6C57198A103A0050471A /* UIKit.framework in Frameworks */,
 				3C6B6C53198A103A0050471A /* Foundation.framework in Frameworks */,
+				F8C6A73D61D7496C9599747F /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -89,6 +93,7 @@
 				3C6B6C77198A103A0050471A /* PushChatTests */,
 				3C6B6C51198A103A0050471A /* Frameworks */,
 				3C6B6C50198A103A0050471A /* Products */,
+				21E12356C70345A7BB9A898A /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -109,6 +114,7 @@
 				3C6B6C54198A103A0050471A /* CoreGraphics.framework */,
 				3C6B6C56198A103A0050471A /* UIKit.framework */,
 				3C6B6C71198A103A0050471A /* XCTest.framework */,
+				2E1C1966429C4D9DB0CD95A0 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -163,9 +169,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3C6B6C81198A103A0050471A /* Build configuration list for PBXNativeTarget "PushChat" */;
 			buildPhases = (
+				1ED6BCF5BFB447158865D2AB /* Check Pods Manifest.lock */,
 				3C6B6C4B198A103A0050471A /* Sources */,
 				3C6B6C4C198A103A0050471A /* Frameworks */,
 				3C6B6C4D198A103A0050471A /* Resources */,
+				17F5D690E22545ACA3D587EB /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -203,6 +211,14 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = NETEASE;
 				TargetAttributes = {
+					3C6B6C4E198A103A0050471A = {
+						DevelopmentTeam = 2T3YRNCC5G;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
+					};
 					3C6B6C6F198A103A0050471A = {
 						TestTargetID = 3C6B6C4E198A103A0050471A;
 					};
@@ -247,6 +263,39 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		17F5D690E22545ACA3D587EB /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		1ED6BCF5BFB447158865D2AB /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		3C6B6C4B198A103A0050471A /* Sources */ = {
@@ -377,27 +426,36 @@
 		};
 		3C6B6C82198A103A0050471A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 21E12356C70345A7BB9A898A /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PushChat/PushChat-Prefix.pch";
 				INFOPLIST_FILE = "PushChat/PushChat-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "9F1B4B10-9615-453A-A20F-6B1B63D8F0AE";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
 		};
 		3C6B6C83198A103A0050471A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 21E12356C70345A7BB9A898A /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PushChat/PushChat-Prefix.pch";
 				INFOPLIST_FILE = "PushChat/PushChat-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "9F1B4B10-9615-453A-A20F-6B1B63D8F0AE";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -461,6 +519,7 @@
 				3C6B6C83198A103A0050471A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3C6B6C84198A103A0050471A /* Build configuration list for PBXNativeTarget "PushChatTests" */ = {
 			isa = XCConfigurationList;
@@ -469,6 +528,7 @@
 				3C6B6C86198A103A0050471A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

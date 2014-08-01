@@ -14,19 +14,28 @@
 {
     // Override point for customization after application launch.
     
+    NSLog(@"App Launched");
+    
     [[UIApplication sharedApplication] registerForRemoteNotificationTypes:
      (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
     
+    
+    self.viewController = [[ViewController alloc] init];
+    [[self window] setRootViewController:self.viewController];
+    self.window.backgroundColor = [UIColor whiteColor];
+    
+    
+    
     UILocalNotification *localNotif = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
     if (localNotif) {
-        NSString *itemName = [localNotif.userInfo objectForKey:@"abc"];
+        NSDictionary *itemName = [localNotif.userInfo objectForKey:@"aps"];
         application.applicationIconBadgeNumber = localNotif.applicationIconBadgeNumber - 1;
     }
     
-    
     UILocalNotification *remoteNotif = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
     if (remoteNotif) {
-        NSString *itemName = [remoteNotif.userInfo objectForKey:@"abc"];
+        NSLog(@"background notification: %@\napplicationIconBadgeNumber: %d", remoteNotif.userInfo, remoteNotif.applicationIconBadgeNumber);
+        //NSDictionary *itemName = [remoteNotif.userInfo objectForKey:@"aps"];
         application.applicationIconBadgeNumber = remoteNotif.applicationIconBadgeNumber - 1;
     }
     return YES;
@@ -56,19 +65,49 @@
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
     //handle remote notification
+    NSLog(@"receive a remote notification: %@",userInfo);
     if ([application applicationState] ==  UIApplicationStateInactive)
     {
         NSLog(@"Running in background");
+        NSDictionary *itemName = [userInfo objectForKey:@"aps"];
+        NSString *alertBody = [itemName objectForKey:@"alert"];
+        self.viewController.message.text = alertBody;
     }
     else if ([application applicationState] ==  UIApplicationStateActive)
     {
         NSLog(@"Running in foreground");
+        NSDictionary *itemName = [userInfo objectForKey:@"aps"];
+        NSString *alertBody = [itemName objectForKey:@"alert"];
+        self.viewController.message.text = alertBody;
+        
+        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"PushChat Notification"
+                                                           message:alertBody
+                                                          delegate:self
+                                                 cancelButtonTitle:@"忽略"
+                                                 otherButtonTitles:@"打开", nil];
+        [alertView show];
+    }
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:
+(NSInteger)buttonIndex{
+    switch (buttonIndex) {
+        case 0:
+            NSLog(@"Cancel button clicked");
+            break;
+        case 1:
+            NSLog(@"OK button clicked");
+            break;
+            
+        default:
+            break;
     }
 }
 
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
 {
-    NSString *itemName = [notification.userInfo objectForKey:@"abc"];
+    NSLog(@"receive a local notification: %@",notification);
+    NSDictionary *itemName = [notification.userInfo objectForKey:@"aps"];
     application.applicationIconBadgeNumber = notification.applicationIconBadgeNumber - 1;
 
 }
